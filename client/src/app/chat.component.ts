@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 
 @Component({
+  selector: 'app-root',
   template: `<div *ngFor="let message of messages">
                      {{message.text}}
                    </div>
-                   <input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>`,
-  providers: [ChatService]
+                   <input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>`
 })
 export class ChatComponent implements OnInit, OnDestroy {
   messages = [];
