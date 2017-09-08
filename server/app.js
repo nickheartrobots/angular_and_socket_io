@@ -5,8 +5,9 @@ let io = require('socket.io')(http);
 const PORT = 5000;
 
 io.on('connection', (socket) => {
-  console.log('user connected');
-  
+  console.log(`user connected ${socket.id}`);
+  socket.emit('id', { id: socket.id});
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
