@@ -1,0 +1,6 @@
+<div *ngFor="let message of messages"
+    [class.me]="message.id === id"
+    [class.them]="message.id !== id">
+    {{message.text}}    
+</div>
+<input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>

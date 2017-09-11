@@ -6,14 +6,14 @@ const PORT = 5000;
 
 io.on('connection', (socket) => {
   console.log(`user connected ${socket.id}`);
-  socket.emit('id', { id: socket.id});
+  socket.emit('message', { type: 'id', id: socket.id});
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
   
   socket.on('add-message', (message) => {
-    io.emit('message', {type:'new-message', text: message});
+    io.emit('message', {type:'new-message', text: message, id: socket.id});
     console.log(`message: ${message}`);    
   });
 });

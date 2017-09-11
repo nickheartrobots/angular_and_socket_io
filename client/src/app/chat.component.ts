@@ -3,26 +3,29 @@ import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-root',
-  template: `<div *ngFor="let message of messages">
-                     {{message.text}}
-                   </div>
-                   <input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>`
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, OnDestroy {
   messages = [];
   connection;
   message;
+  id: string;
 
   constructor(private chatService: ChatService) {}
 
-  sendMessage(){
+  sendMessage() {
     this.chatService.sendMessage(this.message);
     this.message = '';
   }
 
   ngOnInit() {
     this.connection = this.chatService.getMessages().subscribe(message => {
-      this.messages.push(message);
+      if (message.type === 'new-message') {
+          this.messages.push(message);
+      } else if (message.type === 'id') {
+          this.id = message.id;
+      }
     });
   }
 
