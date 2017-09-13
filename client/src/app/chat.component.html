@@ -1,6 +1,13 @@
-<div *ngFor="let message of messages"
-    [class.me]="message.id === id"
-    [class.them]="message.id !== id">
-    {{message.text}}    
+<div class="container">
+    <div *ngFor="let message of messages"
+        class="row">
+        <div
+            [class.me]="message.id === id"
+            [class.them]="message.id !== id"
+            class="col-md-8"
+            [class.col-md-offset-4]="message.id !== id">
+            {{message.text}}    
+        </div>
+    </div>
+    <input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>
 </div>
-<input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>
